@@ -18,7 +18,7 @@ podTemplate(label: 'docker-build',
   ]
 ) {
     node('docker-build') {
-        def dockerHubCred = "dockerhub_cred"
+        def dockerHubCred = "sck1990"
         def appImage
         
         stage('Checkout'){
@@ -63,7 +63,7 @@ podTemplate(label: 'docker-build',
                         branches: [[name: '*/main' ]],
                         extensions: scm.extensions,
                         userRemoteConfigs: [[
-                            url: 'git@github.com:cure4itches/docker-hello-world-deployment.git',
+                            url: 'git@github.com:g-sck/cicd-test.git',
                             credentialsId: 'jenkins-ssh-private',
                         ]]
                 ])
@@ -72,7 +72,7 @@ podTemplate(label: 'docker-build',
                         #!/usr/bin/env bash
                         set +x
                         export GIT_SSH_COMMAND="ssh -oStrictHostKeyChecking=no"
-                        git config --global user.email "cure4itches@gmail.com"
+                        git config --global user.email "ckdrud90@gmail.com"
                         git checkout main
                         cd env/dev && kustomize edit set image arm7tdmi/node-hello-world:${BUILD_NUMBER}
                         git commit -a -m "updated the image tag"
